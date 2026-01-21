@@ -8,6 +8,7 @@ export type CartItem = {
   title: string;
   price: number; // cents
   quantity: number;
+  imageUrl: string | null;
 };
 
 interface CartState {

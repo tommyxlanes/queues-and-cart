@@ -25,12 +25,13 @@ export async function sendOrderEmail(orderId: string) {
       title: i.product.title,
       quantity: i.quantity,
       unitPrice: i.unitPrice,
+      imageUrl: i.product.imageUrl,
     })),
   });
 
   await resend.emails.send({
     from: process.env.EMAIL_FROM!,
-    to: [order.email], // ✅ real customer email
+    to: [order.email],
     subject: "Your order is confirmed 🎉",
     html,
   });

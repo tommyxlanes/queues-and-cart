@@ -6,6 +6,7 @@ type AddToCartProduct = {
   id: string;
   title: string;
   price: number; // cents
+  imageUrl: string | null;
 };
 
 type AddToCartButtonProps = {
@@ -24,6 +25,7 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
           title: product.title,
           price: product.price,
           quantity: 1,
+          imageUrl: product.imageUrl,
         })
       }
     >
