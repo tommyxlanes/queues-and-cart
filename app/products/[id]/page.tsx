@@ -18,6 +18,7 @@ export default async function ProductDetailPage({ params }: Props) {
       title: true,
       price: true,
       inventory: true,
+      imageUrl: true,
     },
   });
 
@@ -27,14 +28,16 @@ export default async function ProductDetailPage({ params }: Props) {
     <div className="max-w-5xl mx-auto px-6 py-12 grid gap-12 md:grid-cols-2">
       {/* Image */}
       <div className="relative aspect-square rounded-xl overflow-hidden bg-neutral-100">
-        <Image
-          src="https://images.unsplash.com/photo-1523275335684-37898b6baf30"
-          alt={product.title}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 50vw"
-          priority
-        />
+        {product.imageUrl && (
+          <Image
+            src={product.imageUrl}
+            alt={product.title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+          />
+        )}
       </div>
 
       {/* Info */}
@@ -57,6 +60,7 @@ export default async function ProductDetailPage({ params }: Props) {
               id: product.id,
               title: product.title,
               price: product.price,
+              imageUrl: product.imageUrl,
             }}
           />
         ) : (

@@ -49,12 +49,14 @@ export default function CartPage() {
                 className="flex gap-4 rounded-xl bg-white p-4 shadow-sm border"
               >
                 {/* Image placeholder */}
-                <Image
-                  src={item.imageUrl}
-                  width="80"
-                  height="80"
-                  alt="Men lucky cat tee"
-                />
+                {item.imageUrl && (
+                  <Image
+                    src={item.imageUrl}
+                    width="80"
+                    height="80"
+                    alt="Men lucky cat tee"
+                  />
+                )}
                 {/* <div className="h-20 w-20 rounded-lg bg-neutral-100 flex-shrink-0">
 
                 </div> */}

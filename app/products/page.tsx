@@ -21,12 +21,16 @@ export default async function ProductsPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {products.map((product) => (
           <div key={product.id} className="border p-4 rounded space-y-2">
-            <Image
-              src={product.imageUrl}
-              height={80}
-              width={80}
-              alt={product.title}
-            />
+            {product.imageUrl ? (
+              <Image
+                src={product.imageUrl}
+                height={80}
+                width={80}
+                alt={product.title}
+              />
+            ) : (
+              <div className="h-20 w-20 bg-neutral-100 rounded" />
+            )}
             <Link href={`/products/${product.id}`}>
               <h2 className="font-medium hover:underline">{product.title}</h2>
             </Link>
