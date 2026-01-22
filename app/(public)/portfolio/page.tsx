@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Download, Mail, MapPin, Globe } from "lucide-react";
+import { Download, Mail, MapPin, Globe, Check } from "lucide-react";
 import Image from "next/image";
 
 const skills = {
@@ -85,7 +85,7 @@ export default function ResumePage() {
   });
 
   // Background moves slower (parallax effect)
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
   const backgroundScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
 
   // Hero content fades and moves up as you scroll
@@ -93,20 +93,20 @@ export default function ResumePage() {
   const heroY = useTransform(scrollYProgress, [0, 0.3], ["0%", "-20%"]);
 
   return (
-    <main ref={containerRef} className="min-h-screen bg-neutral-900 relative">
+    <main ref={containerRef} className="min-h-screen bg-slate-950 relative">
       {/* Parallax Background Image */}
       <motion.div
         className="fixed inset-0 w-full h-full"
         style={{ y: backgroundY, scale: backgroundScale }}
       >
         <Image
-          src="/la-city-line.jpg"
+          src="/la-art.webp"
           alt="Los Angeles Skyline"
           fill
           className="object-cover object-center"
           priority
         />
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-slate-950/40" />
       </motion.div>
 
       {/* Hero Section with fade effect */}
@@ -129,7 +129,7 @@ export default function ResumePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-xl text-white/80"
+                className="text-xl text-slate-300"
               >
                 Full-Stack Developer & Designer
               </motion.p>
@@ -137,18 +137,18 @@ export default function ResumePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="flex flex-wrap gap-3 text-sm text-white/70"
+                className="flex flex-wrap gap-3 text-sm text-slate-400"
               >
-                <span className="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5">
-                  <MapPin className="w-4 h-4" />
+                <span className="flex items-center gap-1.5 bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-full px-3 py-1.5">
+                  <MapPin className="w-4 h-4 text-violet-400" />
                   Los Angeles, CA
                 </span>
-                <span className="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5">
-                  <Mail className="w-4 h-4" />
+                <span className="flex items-center gap-1.5 bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-full px-3 py-1.5">
+                  <Mail className="w-4 h-4 text-violet-400" />
                   Tommyvong88@gmail.com
                 </span>
-                <span className="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5">
-                  <Globe className="w-4 h-4" />
+                <span className="flex items-center gap-1.5 bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-full px-3 py-1.5">
+                  <Globe className="w-4 h-4 text-violet-400" />
                   tommyvong.com
                 </span>
               </motion.div>
@@ -160,7 +160,7 @@ export default function ResumePage() {
               transition={{ duration: 0.6, delay: 0.3 }}
               href="/TommyVong-Resume-2025.pdf"
               download
-              className="inline-flex items-center gap-2 bg-white text-neutral-900 px-6 py-3 rounded-full font-medium hover:bg-white/90 transition w-fit shadow-lg"
+              className="inline-flex items-center gap-2 bg-violet-500 text-white px-6 py-3 rounded-full font-medium hover:bg-violet-600 transition w-fit shadow-lg shadow-violet-500/25"
             >
               <Download className="w-5 h-5" />
               Download CV
@@ -175,7 +175,7 @@ export default function ResumePage() {
           initial={{ y: 100 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="bg-white/70 backdrop-blur-2xl rounded-t-[3rem] border-t border-white/50 shadow-[0_-20px_60px_rgba(0,0,0,0.3)]"
+          className="bg-slate-900/80 backdrop-blur-xl rounded-t-[3rem] border-t border-slate-700/50 shadow-[0_-20px_60px_rgba(0,0,0,0.5)]"
         >
           {/* Summary */}
           <div className="max-w-5xl mx-auto px-6 py-16">
@@ -184,7 +184,7 @@ export default function ResumePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6 }}
-              className="text-lg text-neutral-700 leading-relaxed max-w-3xl"
+              className="text-lg text-slate-400 leading-relaxed max-w-3xl"
             >
               Full-stack developer with 10+ years of design experience,
               specializing in modern web applications and e-commerce solutions.
@@ -195,14 +195,14 @@ export default function ResumePage() {
           </div>
 
           {/* Skills */}
-          <div className="bg-white/50 backdrop-blur-sm border-y border-white/30">
+          <div className="bg-slate-800/30 border-y border-slate-700/50">
             <div className="max-w-5xl mx-auto px-6 py-16">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="text-2xl font-bold mb-8 text-neutral-900"
+                className="text-2xl font-bold mb-8 text-slate-100"
               >
                 Technical Skills
               </motion.h2>
@@ -215,20 +215,39 @@ export default function ResumePage() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                    className="bg-white/60 backdrop-blur-sm rounded-2xl p-5 border border-white/50 shadow-sm hover:shadow-md transition-shadow"
+                    className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-5 border border-slate-700/50 hover:border-violet-500/50 transition-all"
                   >
-                    <h3 className="font-semibold text-neutral-900 mb-3">
+                    <h3 className="font-semibold text-violet-400 mb-3">
                       {category}
                     </h3>
-                    <ul className="space-y-1.5">
-                      {items.map((skill) => (
-                        <li
+                    <ul className="space-y-2">
+                      {items.map((skill, skillIndex) => (
+                        <motion.li
                           key={skill}
-                          className="text-sm text-neutral-600 flex items-center gap-2"
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{
+                            duration: 0.3,
+                            delay: index * 0.1 + skillIndex * 0.05,
+                          }}
+                          className="text-sm text-slate-400 flex items-center gap-2"
                         >
-                          <span className="w-1.5 h-1.5 rounded-full bg-neutral-400" />
+                          <motion.span
+                            initial={{ scale: 0 }}
+                            whileInView={{ scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{
+                              type: "spring",
+                              stiffness: 300,
+                              damping: 20,
+                              delay: index * 0.1 + skillIndex * 0.05 + 0.1,
+                            }}
+                          >
+                            <Check className="w-4 h-4 text-violet-500" />
+                          </motion.span>
                           {skill}
-                        </li>
+                        </motion.li>
                       ))}
                     </ul>
                   </motion.div>
@@ -238,13 +257,13 @@ export default function ResumePage() {
           </div>
 
           {/* Experience */}
-          <div className="max-w-5xl mx-auto px-6 py-16">
+          <section className="max-w-5xl mx-auto px-6 py-16">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="text-2xl font-bold mb-10 text-neutral-900"
+              className="text-2xl font-bold mb-10 text-slate-100"
             >
               Experience
             </motion.h2>
@@ -256,46 +275,49 @@ export default function ResumePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-white/50 shadow-sm"
+                  className="relative pl-8 border-l-2 border-slate-700"
                 >
-                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-4">
-                    <div>
-                      <h3 className="text-xl font-semibold text-neutral-900">
-                        {job.title}
-                      </h3>
-                      <p className="text-neutral-600">
-                        {job.company} · {job.location}
-                      </p>
+                  <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-violet-500 shadow-lg shadow-violet-500/50" />
+                  <div className="space-y-3">
+                    <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2">
+                      <div>
+                        <h3 className="text-xl font-semibold text-slate-100">
+                          {job.title}
+                        </h3>
+                        <p className="text-slate-400">
+                          {job.company} · {job.location}
+                        </p>
+                      </div>
+                      <span className="text-sm text-violet-400 bg-violet-500/10 border border-violet-500/20 px-3 py-1 rounded-full w-fit">
+                        {job.period}
+                      </span>
                     </div>
-                    <span className="text-sm text-neutral-500 bg-neutral-100 px-3 py-1 rounded-full w-fit">
-                      {job.period}
-                    </span>
+                    <ul className="space-y-2">
+                      {job.highlights.map((highlight, i) => (
+                        <li
+                          key={i}
+                          className="text-slate-400 text-sm leading-relaxed flex items-start gap-2"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-slate-600 mt-2 flex-shrink-0" />
+                          {highlight}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <ul className="space-y-2">
-                    {job.highlights.map((highlight, i) => (
-                      <li
-                        key={i}
-                        className="text-neutral-600 text-sm leading-relaxed flex items-start gap-2"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 mt-2 flex-shrink-0" />
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
                 </motion.div>
               ))}
             </div>
-          </div>
+          </section>
 
           {/* Education */}
-          <div className="bg-white/50 backdrop-blur-sm border-t border-white/30">
+          <div className="bg-slate-800/30 border-t border-slate-700/50">
             <div className="max-w-5xl mx-auto px-6 py-16">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="text-2xl font-bold mb-8 text-neutral-900"
+                className="text-2xl font-bold mb-8 text-slate-100"
               >
                 Education
               </motion.h2>
@@ -304,18 +326,18 @@ export default function ResumePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-white/50 shadow-sm"
+                className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50"
               >
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                   <div>
-                    <h3 className="text-xl font-semibold text-neutral-900">
+                    <h3 className="text-xl font-semibold text-slate-100">
                       Bachelor of Fine Arts in Graphic Design
                     </h3>
-                    <p className="text-neutral-600">
+                    <p className="text-slate-400">
                       California State Polytechnic University, Pomona
                     </p>
                   </div>
-                  <span className="text-sm text-neutral-500 bg-neutral-100 px-3 py-1 rounded-full w-fit">
+                  <span className="text-sm text-violet-400 bg-violet-500/10 border border-violet-500/20 px-3 py-1 rounded-full w-fit">
                     2007 – 2013
                   </span>
                 </div>
@@ -324,14 +346,14 @@ export default function ResumePage() {
           </div>
 
           {/* CTA */}
-          <div className="bg-neutral-900 text-white">
+          <div className="bg-slate-950 border-t border-slate-800">
             <div className="max-w-5xl mx-auto px-6 py-16 text-center space-y-6">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="text-2xl font-bold"
+                className="text-2xl font-bold text-slate-100"
               >
                 Let's work together
               </motion.h2>
@@ -340,7 +362,7 @@ export default function ResumePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-neutral-400 max-w-xl mx-auto"
+                className="text-slate-400 max-w-xl mx-auto"
               >
                 I'm currently available for freelance projects and full-time
                 opportunities. Let's build something great.
@@ -354,7 +376,7 @@ export default function ResumePage() {
               >
                 <a
                   href="mailto:Tommyvong88@gmail.com"
-                  className="inline-flex items-center gap-2 bg-white text-neutral-900 px-6 py-3 rounded-full font-medium hover:bg-neutral-100 transition"
+                  className="inline-flex items-center gap-2 bg-violet-500 text-white px-6 py-3 rounded-full font-medium hover:bg-violet-600 transition shadow-lg shadow-violet-500/25"
                 >
                   <Mail className="w-5 h-5" />
                   Get in touch
@@ -362,7 +384,7 @@ export default function ResumePage() {
                 <a
                   href="/TommyVong-Resume-2025.pdf"
                   download
-                  className="inline-flex items-center gap-2 border border-neutral-700 px-6 py-3 rounded-full font-medium hover:bg-neutral-800 transition"
+                  className="inline-flex items-center gap-2 border border-slate-700 text-slate-300 px-6 py-3 rounded-full font-medium hover:bg-slate-800 transition"
                 >
                   <Download className="w-5 h-5" />
                   Download CV
