@@ -81,47 +81,66 @@ export default function ResumePage() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"],
+    offset: ["start start", "end end"],
   });
 
-  // Background moves slower (parallax effect)
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
-  const backgroundScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+  // Parallax moves during first 50% of scroll, then stops
+  const backgroundY = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    ["0%", "-15%", "-15%"],
+  );
+  const backgroundScale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [1, 1.1, 1.1],
+  );
 
-  // Hero content fades and moves up as you scroll
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-  const heroY = useTransform(scrollYProgress, [0, 0.3], ["0%", "-20%"]);
+  // Hero fades out earlier
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 0.15], ["0%", "-20%"]);
 
   return (
     <main ref={containerRef} className="min-h-screen bg-slate-950 relative">
-      {/* Parallax Background Image */}
-      <motion.div
-        className="fixed inset-0 w-full h-full"
-        style={{ y: backgroundY, scale: backgroundScale }}
-      >
-        <Image
-          src="/la-art.webp"
-          alt="Los Angeles Skyline"
-          fill
-          className="object-cover object-center"
-          priority
-        />
-        <div className="absolute inset-0 bg-slate-950/40" />
-      </motion.div>
+      {/* Parallax Background - Fixed but with movement effect */}
+      <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute inset-0 w-full h-full will-change-transform"
+          style={{ y: backgroundY, scale: backgroundScale }}
+        >
+          {/* Mobile image */}
+          <Image
+            src="/la-art-mobile.png"
+            alt="Los Angeles Skyline"
+            fill
+            className="object-cover object-center md:hidden"
+            priority
+          />
+          {/* Desktop image */}
+          <Image
+            src="/la-art.png"
+            alt="Los Angeles Skyline"
+            fill
+            className="object-cover object-center hidden md:block"
+            priority
+          />
+          <div className="absolute inset-0 bg-slate-950/40" />
+        </motion.div>
+      </div>
 
       {/* Hero Section with fade effect */}
       <motion.section
-        className="relative z-10 min-h-[60vh] flex items-end"
+        className="relative z-10 min-h-auto md:min-h-[60vh] hidden md:flex items-end"
         style={{ opacity: heroOpacity, y: heroY }}
       >
-        <div className="max-w-5xl mx-auto px-6 pb-24 pt-32 w-full">
+        <div className="max-w-5xl mx-auto px-6 pb-12 md:pb-24 pt-12 md:pt-32 w-full">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-            <div className="space-y-4">
+            <div className="">
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="text-5xl md:text-6xl font-bold tracking-tight text-white drop-shadow-lg"
+                className="text-3xl md:text-5xl font-bold tracking-tight text-white drop-shadow-lg"
               >
                 Tommy Vong
               </motion.h1>
@@ -129,7 +148,7 @@ export default function ResumePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-xl text-slate-300"
+                className="text-md md:text-xl text-slate-500"
               >
                 Full-Stack Developer & Designer
               </motion.p>
@@ -137,7 +156,7 @@ export default function ResumePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="flex flex-wrap gap-3 text-sm text-slate-400"
+                className="flex flex-wrap gap-3 text-sm text-slate-400 mt-4"
               >
                 <span className="flex items-center gap-1.5 bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-full px-3 py-1.5">
                   <MapPin className="w-4 h-4 text-violet-400" />
@@ -158,7 +177,7 @@ export default function ResumePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              href="/TommyVong-Resume-2025.pdf"
+              href="/TommyVong-Resume-2026.pdf"
               download
               className="inline-flex items-center gap-2 bg-violet-500 text-white px-6 py-3 rounded-full font-medium hover:bg-violet-600 transition w-fit shadow-lg shadow-violet-500/25"
             >
@@ -170,7 +189,7 @@ export default function ResumePage() {
       </motion.section>
 
       {/* Glassmorphic Resume Content */}
-      <section className="relative z-10">
+      <section className="relative z-10 mt-54 md:mt-0 z-10">
         <motion.div
           initial={{ y: 100 }}
           animate={{ y: 0 }}
@@ -244,7 +263,7 @@ export default function ResumePage() {
                               delay: index * 0.1 + skillIndex * 0.05 + 0.1,
                             }}
                           >
-                            <Check className="w-4 h-4 text-violet-500" />
+                            <Check className="w-4 h-4 text-cyan-300" />
                           </motion.span>
                           {skill}
                         </motion.li>
@@ -275,7 +294,7 @@ export default function ResumePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="relative pl-8 border-l-2 border-slate-700"
+                  className="relative pl-8 border-l-2 border-violet-300/10"
                 >
                   <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-violet-500 shadow-lg shadow-violet-500/50" />
                   <div className="space-y-3">
@@ -382,7 +401,7 @@ export default function ResumePage() {
                   Get in touch
                 </a>
                 <a
-                  href="/TommyVong-Resume-2025.pdf"
+                  href="/TommyVong-Resume-2026.pdf"
                   download
                   className="inline-flex items-center gap-2 border border-slate-700 text-slate-300 px-6 py-3 rounded-full font-medium hover:bg-slate-800 transition"
                 >

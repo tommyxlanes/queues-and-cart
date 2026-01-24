@@ -16,7 +16,7 @@ export function NewsletterForm() {
   }
 
   return (
-    <div className="flex justify-center p-8 bg-gray-200 mt-auto">
+    <div className="flex justify-center p-8 bg-gray-200 mt-auto z-10">
       <form action={action} className="flex gap-2 max-w-sm">
         <input
           type="email"
